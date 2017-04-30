@@ -57,7 +57,7 @@ gulp.task('templates', function () {
    .pipe(templateCache({
      module: packageName
    }))
-   .pipe(rename([packageName, 'templates.js'].join('')))
+   .pipe(rename([packageName, '.templates.js'].join('')))
    .pipe(gulp.dest('build'));
 });
 
@@ -97,6 +97,6 @@ gulp.task('service', function () {
 //
 // gulp.task('tests', ['e2eTest']);
 gulp.task('build', ['templates', 'service', 'styles']);
-gulp.task('deploy', ['build']);
+// gulp.task('deploy', ['build']);
 
 gulp.task('default', ['deploy'], function () {});
