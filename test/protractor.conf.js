@@ -1,4 +1,3 @@
-//jshint strict: false
 exports.config = {
 
   allScriptsTimeout: 11000,
@@ -8,7 +7,7 @@ exports.config = {
   ],
 
   capabilities: {
-    'browserName': 'chrome'
+    browserName: 'chrome'
   },
 
   baseUrl: 'http://localhost:8000/',

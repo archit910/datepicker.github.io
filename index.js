@@ -2,6 +2,6 @@
  * Created by Ayush Sharma
  */
 
-// Uncomment these line when making module.
-// require('./dist/<module-name-here>.js');
-// module.exports = '<module-name-here>';
+// Change these lines when you are publishing a module
+require('./dist/hello.js');
+module.exports = 'hello';

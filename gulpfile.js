@@ -4,85 +4,86 @@ var minifyCSS = require('gulp-minify-css');
 var csscomb = require('gulp-csscomb');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var rename = require('gulp-rename');
 var header = require('gulp-header');
 var templateCache = require('gulp-angular-templatecache');
-var minifyHtml = require("gulp-minify-html");
+var minifyHtml = require('gulp-minify-html');
 var concat = require('gulp-concat');
 var addsrc = require('gulp-add-src');
-var order = require("gulp-order");
-var protractor = require("gulp-protractor").protractor;
+var order = require('gulp-order');
+var packageName = 'hello';
+// var protractor = require('gulp-protractor').protractor;
 
 var pkg = require('./package.json');
 var banner = ['/**',
- ' * <%= pkg.name %> - <%= pkg.description %>',
- ' * @author <%= pkg.author %>',
- ' * @version v<%= pkg.version %>',
- ' * @link <%= pkg.homepage %>',
- ' * @license <%= pkg.license %>',
- ' */',
- ''].join('\n');
+  ' * <%= pkg.name %> - <%= pkg.description %>',
+  ' * @author <%= pkg.author %>',
+  ' * @version v<%= pkg.version %>',
+  ' * @link <%= pkg.homepage %>',
+  ' * @license <%= pkg.license %>',
+  ' */',
+  ''].join('\n');
 
  // ==== Styles
-gulp.task('styles', function() {
-   gulp.src('src/build.less')
-       .pipe(less({
-           strictMath: true
-       }))
-       .pipe(csscomb())
-       .pipe(header(banner, { pkg : pkg }))
-       .pipe(rename({
-           basename: '<module-name-here>'
-       }))
-       .pipe(gulp.dest('dist'))
-       .pipe(minifyCSS())
-       .pipe(rename({
-           suffix: '.min'
-       }))
-       .pipe(header(banner, { pkg : pkg }))
-       .pipe(gulp.dest('dist'))
-       .pipe(gulp.dest('demo'));
+gulp.task('styles', function () {
+  gulp.src('src/build.less')
+     .pipe(less({
+       strictMath: true
+     }))
+     .pipe(csscomb())
+     .pipe(header(banner, { pkg: pkg }))
+     .pipe(rename({
+       basename: packageName
+     }))
+     .pipe(gulp.dest('dist'))
+     .pipe(minifyCSS())
+     .pipe(rename({
+       suffix: '.min'
+     }))
+     .pipe(header(banner, { pkg: pkg }))
+     .pipe(gulp.dest('dist'))
+     .pipe(gulp.dest('demo'));
 });
 
 // ====== Templates
-gulp.task('templates', function() {
-   gulp.src(['*.html'], {cwd: 'src'})
-       .pipe(minifyHtml({
-           empty: true,
-           spare: true,
-           quotes: true
-       }))
-       .pipe(templateCache({
-           module: '<module-name-here>'
-       }))
-       .pipe(rename('<module-name-here>.templates.js'))
-       .pipe(gulp.dest('build'));
+gulp.task('templates', function () {
+  gulp.src(['*.html'], { cwd: 'src' })
+   .pipe(minifyHtml({
+     empty: true,
+     spare: true,
+     quotes: true
+   }))
+   .pipe(templateCache({
+     module: packageName
+   }))
+   .pipe(rename([packageName, 'templates.js'].join('')))
+   .pipe(gulp.dest('build'));
 });
 
-gulp.task('service', function() {
-   gulp.src(['src/*.js'])
-       .pipe(jshint())
-       .pipe(jshint.reporter('default'))
-       .pipe(jshint.reporter('fail'))
-       .pipe(ngAnnotate())
-       .pipe(addsrc('build/*.js'))
-       .pipe(order([
-           'src/*.js',
-           'build/angular-ui-notification.templates.js'
-       ]))
-       .pipe(concat('angular-ui-notification.js'))
+gulp.task('service', function () {
+  gulp.src(['src/*.js'])
+   .pipe(eslint())
+   .pipe(eslint.format())
+   .pipe(eslint.failAfterError())
+   .pipe(ngAnnotate())
+   .pipe(addsrc('build/*.js'))
+   .pipe(order([
+     'src/*.js',
+     'build/*.templates.js'
+   ]))
+   .pipe(concat([packageName, '.js'].join('')))
 
-       .pipe(header(banner, { pkg : pkg }))
-       .pipe(gulp.dest('dist'))
+   .pipe(header(banner, { pkg: pkg }))
+   .pipe(gulp.dest('dist'))
 
-       .pipe(uglify())
-       .pipe(rename({
-           suffix: '.min'
-       }))
-       .pipe(header(banner, { pkg : pkg }))
-       .pipe(gulp.dest('dist'))
-       .pipe(gulp.dest('demo'));
+   .pipe(uglify())
+   .pipe(rename({
+     suffix: '.min'
+   }))
+   .pipe(header(banner, { pkg: pkg }))
+   .pipe(gulp.dest('dist'))
+   .pipe(gulp.dest('demo'));
 });
 
 // ======
@@ -96,6 +97,6 @@ gulp.task('service', function() {
 //
 // gulp.task('tests', ['e2eTest']);
 gulp.task('build', ['templates', 'service', 'styles']);
-gulp.task('deploy', ['build', 'tests']);
+gulp.task('deploy', ['build']);
 
-gulp.task('default', ['deploy'], function() {});
+gulp.task('default', ['deploy'], function () {});
