@@ -1,5 +1,5 @@
 # `angular-module-boilerplate` — the simple scaffloding for a module
-This project is an application skeleton for a typical angular module app. You can use it
+This project is an application skeleton for a typical angular module. You can use it
 to quickly bootstrap your angular modules.
 
 ## Getting Started
