@@ -3,10 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "main": "index.js",
-  "description": "A starter project for AngularJS Module",
-  "homepage": "http://ayusharma.in",
+  "description": "A Daterange Picker AngularJS Module",
   "repository": "",
-  "author": "Ayush Sharma",
+  "author": "Vansh Khanna",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",

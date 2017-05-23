@@ -1,0 +1,10 @@
+ h2 , .range-box:not(.shft-lft) {
+  font-family: sans-serif;
+  line-height: 3;
+}
+p {
+  font-size: 14px;
+}
+.range-box.shft-lft {
+  margin-left: 10px;
+}

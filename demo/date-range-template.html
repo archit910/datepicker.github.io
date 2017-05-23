@@ -1,0 +1,89 @@
+<div  class=" dropdown large-12 column element-bar date-display-bar">
+  <div uuid="{{uuid}}" ng-click="showdropdown = !showdropdown; displayPickers($event);" class="button date-display-bar button-icon icon-right inline has-cursor">
+    <div ng-if="rangemode"> {{start | date}} – {{end | date}} by {{timerange.resolution.displayName}}<i class="icon material-icons" style="vertical-align: middle;">keyboard_arrow_down</i>
+    </div>
+    <div ng-if="singlemode">{{singledate | date}}<i class="icon material-icons" style="vertical-align: middle;">keyboard_arrow_down</i>
+    </div>
+</div>
+
+<div class="dropdown-content" ng-style="{width: containerWidth, height: containerHeight}" style="display:block;" ng-show="!showdropdown" >
+  <span></span>
+    <div ng-if="rangemode">
+        <div class="row">
+          <div class="columns large-2"></div>
+           <div class="dateinput-left columns large-4">
+              <i class="material-icons large dp48" style=" font-size: 17px; opacity: 0.4;">perm_contact_calendar</i>
+              <input ng-change="changeDateFromInput('start')" class="no-margin datenum" type="number" ng-model="starthandle.year"  placeholder="yyyy">/<input class="no-margin datenum" type="number" ng-change="changeDateFromInput('start')" ng-model="starthandle.month"  placeholder="mm">/<input class="no-margin datenum" ng-change="changeDateFromInput('start')" ng-model="starthandle.days"
+               type="number" placeholder="dd">
+           </div>
+           <div class="columns large-1"><strong>TO</strong></div>
+           <div class="dateinput-right columns large-4">
+             <i class="material-icons large dp48" style=" font-size: 17px; opacity: 0.4;">perm_contact_calendar</i>
+             <input class="no-margin datenum" ng-model="endhandle.year" ng-change="changeDateFromInput('end')" type="number"  placeholder="yyyy">/<input class="no-margin datenum" ng-model="endhandle.month" ng-change="changeDateFromInput('end')" type="number"  placeholder="mm">/<input class="no-margin datenum" ng-model="endhandle.days" ng-change="changeDateFromInput('end');"
+              type="number" placeholder="dd">
+          </div>
+        </div>
+       <div class="row equalize-wrapper">
+             <div  style="margin-top: 10px;" class="columns large-6">
+              <div class="picker-left">
+                <date-picker mode='range' callback="getDate" id="left" startofweek="startofweek" ng-model="timerange.start_time"  placeholder="Start Date"
+                  format="MMM dd, yyyy" not-after="timerange.notAfterDate" class="no-margin">
+                </date-picker>
+              </div>
+             </div>
+         <div style="margin-top: 10px" class="columns large-6">
+             <div class="picker-right">
+               <date-picker mode='range' callback="getDate" id="right" startofweek="startofweek" ng-model="timerange.end_time"  placeholder="End Date"
+               format="MMM dd, yyyy" class="no-margin"
+               not-before="timerange.notBeforeDate"></date-picker>
+             </div>
+         </div>
+      </div>
+       <div class="row timepicker-container">
+          <div class="columns large-6">
+            <div class="timepicker-left-container">
+             <div ng-if="timepicker" style="width: 149px;" class=" dateinput-left no-margin timepicker-left">
+              <input parsetime ng-model="starttimehandle.hours" ng-change="validateTime(this)" type="number" class="datenum no-margin" placeholder="hh">:<input parsetime ng-model="starttimehandle.minutes" ng-change="validateTime(this)" type="number" class="datenum no-margin" placeholder="mm">:<input parsetime ng-model="starttimehandle.seconds" ng-change="validateTime(this)" class="datenum no-margin" type="number" placeholder="ss">
+              </div>
+              <span ng-if="clock === 12 && timepicker">
+                <input type="button" style="margin-top: 10px;height: 34px;" class="button default" value="AM" ng-click="toggleMeridianFun('left', $event)">
+              </span>
+            </div>
+          </div>
+         <div class="columns large-6">
+            <div class="timepicker-right-container">
+              <div ng-if="timepicker" style="width: 149px;" class="dateinput-right timepicker-right">
+                <input parsetime ng-model="endtimehandle.hours" ng-change="validateTime(this)" type="number" class=" no-margin datenum" placeholder="hh">:<input parsetime ng-model="endtimehandle.minutes" ng-change="validateTime(this)" type="number" class="datenum no-margin" placeholder="mm">:<input parsetime ng-model="endtimehandle.seconds" ng-change="validateTime(this)" class="datenum no-margin" type="number" placeholder="ss">
+              </div>
+              <span ng-if="clock === 12 && timepicker">
+                <input type="button" style="margin-top: 10px;height: 34px;"class="button default" value="AM" ng-click="toggleMeridianFun('right', $event)">
+              </span>
+          </div>
+         </div>
+       </div>
+      <div style="position: absolute;right: 15px;bottom: 7px;">
+          <div ng-click="submitDate()" ng-disabled="!(end !== 'endDate') || invalidTimeRangeMode"  class="button primary" >Submit</div>
+      </div>
+    </div>
+    <div ng-if="singlemode">
+      <div>
+        <input ng-change="singleModeInputDate()" class="no-margin datenum" type="number" ng-model="singlemodehandle.year"  placeholder="yyyy">/<input class="no-margin datenum" type="number" ng-change="singleModeInputDate()" ng-model="singlemodehandle.month"  placeholder="mm">/<input class="no-margin datenum" ng-change="singleModeInputDate()"  ng-model="singlemodehandle.days"
+       type="number" placeholder="dd">
+      </div>
+        <div>
+            <date-picker mode='single' ng-model="singleModeDateModel" callback="getDateSingleMode" id="single" startofweek="startofweek" placeholder="Select Date"
+            format="MMM dd, yyyy"  today="true" class="no-margin"
+            ></date-picker>
+        </div>
+        <div ng-if="timepicker"  style="padding-right: 50px; width:261px;">
+          <input parsetime ng-model="singleModeTime.hours" ng-change="validateTime(this)" type="number" class="datenum" placeholder="hh">:<input parsetime ng-model="singleModeTime.minutes" ng-change="validateTime(this)" type="number" class="datenum" placeholder="mm">:<input  parsetime ng-model="singleModeTime.seconds" ng-change="validateTime(this)" class="datenum" type="number" placeholder="ss">
+          <span ng-if="clock === 12">
+            <input type="button" style="margin-top: 10px;height: 34px;" class="button default" value="AM" ng-click="toggleMeridianFun('single', $event)">
+          </span>
+        </div>
+        <div style="position: absolute;right: 15px;bottom: 7px;">
+            <div ng-click="submitDate()" ng-disabled="!validSingleModeDate"  class="button primary" >Submit</div>
+        </div>
+      </div>
+ </div>
+</div>

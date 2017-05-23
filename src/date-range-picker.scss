@@ -1,0 +1,112 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.day:hover {
+background:  #2b5ea2;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 100;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.datenum {
+  border: none;
+  background: #e2e8ed;
+  width: 48px;
+  display: inline;
+  -moz-appearance: textfield;
+}
+input.datenum:hover {
+  background: #d8e0e5;
+}
+input.datenum:focus {
+  background: #b2d7ff;
+  border: none;
+}
+.border-radius-start {
+  border-top-left-radius: 34px !important;
+  border-bottom-left-radius: 34px !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+.inbetweendates {
+  background: #d8e0e5;
+  border-radius: 0 !important;
+}
+.border-radius-end {
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-top-right-radius: 34px !important;
+  border-bottom-right-radius: 34px !important;
+}
+.startdate {
+  background: #086e87;
+}
+.enddate {
+  background: #086e87;
+}
+.corner-element-left-td {
+  border-bottom-left-radius: 20px !important;
+  border-top-left-radius: 20px !important;
+}
+.corner-element-right-td {
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+.spacing-btw-tr {
+  border-bottom: 2px solid white !important;
+}
+.meridian {
+
+    border: 1px solid darkgrey;
+    font-family: -webkit-pictograph;
+    box-shadow: 1px 1px 2px;
+    border-radius: 2px;
+
+}
+.bzm-date-picker .datepicker {
+  border-style: none !important;
+}
+.picker-left {
+}
+.picker-right {
+      margin-right: 0px;
+      position: absolute;
+      right: 38px;
+}
+.dateinput-left{
+    margin-left: 40px;
+    padding-left: 0px;
+    border: 1px solid #96a8b2;
+    background: #e2e8ed;
+}
+.dateinput-right {
+    padding-left: 0px;
+    margin-right: 95px;
+    border: 1px solid #96a8b2;
+    background: #e2e8ed;
+}
+.timepicker-left-container {
+    padding-right: 80px;
+    border-right: none;
+}
+.timepicker-right-container {
+    margin-right: 22px;
+    margin-left: -21px;
+    padding-right: 80px;
+    border-left: none;
+}
+.timepicker-container {
+    position: inherit;
+    bottom: 68px;
+}
