@@ -15,7 +15,7 @@ function rangeHandler($window, $timeout, datepickerUtility, $filter) {
       clock: '='
     },
     restrict: 'E',
-    templateUrl: 'date-range-template.html',
+    templateUrl: '../docs/date-range-template.html',
     link: function (scope, element, attribute) {
       var repositionPickers;
       var removeEventHandlers;
