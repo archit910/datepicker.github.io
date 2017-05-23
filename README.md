@@ -1,46 +1,20 @@
-# `angular-module-boilerplate` — the simple scaffloding for a module
-This project is an application skeleton for a typical angular module. You can use it
-to quickly bootstrap your angular modules.
+### Datashop Date-range Directive.
 
-## Getting Started
-
-To get you started you can simply clone the `angular-module-boilerplate` repository and install the dependencies:
-
-### Prerequisites
-
-#### Clone `angular-module-boilerplate`
-
-Clone the `angular-module-boilerplate` repository using git:
+###### Usage:
 
 ```
-git clone https://github.com/ayusharma/angular-module-boilerplate.git
-cd angular-module-boilerplate
+This directive will appear as a HTML element with the following Attributes:
+Example:
+  <range-handler clock="12" mode="range" callback="dpcb" default-start-date="" default-end-date="" format="MMM dd, yyyy" timerange="timerange" timepicker="true"></range-handler>
 ```
 
-If you just want to start a new project without the `angular-module-boilerplate` commit history then you can do:
+###### Attributes:
 
-```
-git clone --depth=1 https://github.com/ayusharma/angular-module-boilerplate.git <your-project-name>
-```
-
-The `depth=1` tells git to only pull down one commit worth of historical data.
-
-### Install Dependencies
-
-We have preconfigured `npm` to automatically run `bower` so we can simply do:
-
-```
-npm install
-```
-
-Behind the scenes this will also call `bower install`. After that, you should find out that you have
-two new folders in your project.
-
-* `node_modules` - contains the npm packages for the tools we need
-* `demo/bower_components` - contains the Angular framework files
-
-###  Building Module
-
-```js
-  gulp build
-```
+- mode - single or range.
+- callback - callback to be called on date submitDate.
+- format - format in which the date is to be displayed and returned.
+- default-start-date - if mode is range.
+- default-end-date - if mode is range.
+- timepicker - true if needed/ default is false.
+- clock - 12/24 hour time selection, if timepicker is set to true, default is 24.
+- default-date - if mode is single.

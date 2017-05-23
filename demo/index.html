@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.14/angular.min.js"></script>
+    <script src="lodash.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="http://staging.innovaccer.com/public/css/datashop.css">
+    <link rel="stylesheet" type="text/css" href="date-range-picker.css">
+    <link rel="stylesheet" type="text/css" href="demo.css">
+    <script src="app.js"></script>
+    <script src="date-picker.directive.js"></script>
+    <script src="date-range-directive.js"></script>
+    <script src="datepickerUtility.js"></script>
+    <title>Datepicker Demo</title>
+  </head>
+  <body>
+      <div class="main-content" ng-app="app">
+        <div  class="main-content" ng-controller="ctrl" >
+          <header>
+          <div class="row">
+              <div class="columns large-12">
+                <h1>DATEPICKER DEMO</h1>
+                <hr class="no-margin">
+              </div>
+          </div>
+          <div class="row">
+              <div class="columns large-12">
+                <h2>Datepicker Popup(<small>datashop.datepicker</small>)</h2>
+                <hr class="no-margin">
+                  <div ng-if="mode === 'range'" style="line-height: 50px; margin-left: 10px;" class="range-box">
+                    <pre><code>Start Date: {{startDate}}  End Date: {{endDate}}  Clock {{clock}}</code></pre>
+                  </div>
+                  <div ng-if="!(mode === 'range')" style="line-height: 50px; margin-left: 10px;" class="range-box">
+                    <pre><code>Date: {{date}}   Time: {{time.hours}}:{{time.minutes}}:{{time.seconds}}  {{meridian}} Clock {{clock}}</code></pre>
+                  </div>
+              </div>
+          </div>
+        </header>
+              <div class="row">
+                <div class="columns large-5">
+                  <range-handler mode="mode" startofweek="startofweek" timerange="timerange" clock="clock" timepicker="timepicker" callback="getDate" format="dd, MMM yyyy"></range-handler>
+                </div>
+                <div class="columns large-7 range-box shft-lft">
+                  <div class="row">
+                    <div>
+                        <button  type="button" class="button primary" ng-click="changeMode()">Toggle Mode [{{mode}}]</button>
+                        <button type="button" class="button default" checked ng-click="pickerToggle()">Timepicker [{{timepicker}}]</button>
+                        <button type="button" class="button success" ng-click="clockToggle()">Toggle Clock(12/24) [{{clock}}]</button>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">Datashop-Datepicker options</h3>
+                  </div>
+                  <div class="row">
+                    <ul class="range-box" ng-repeat="mode in modes">
+                      <li ng-repeat="option in mode">
+                        <p><code style="border-radius: 4px;">{{option.label}}</code>:&nbsp;{{option.desc}}</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+               </div>
+             </body>
+          </html>
